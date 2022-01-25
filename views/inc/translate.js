@@ -37,16 +37,16 @@ $(document).ready(function () {
 //     changeLang();
 //     $("select")
 //         .change(function () {
-//             $("#btn-es").on("click", function () {
+//             $("#btn-es:selected").each(function () {
 //                 changeLang('es')
 //             });
-//             $("#btn-en").on("click", function () {
+//             $("#btn-en:selected").each(function () {
 //                 changeLang('en')
 //             });
 //             $("#btn-val:selected").each(function () {
 //                 changeLang('val')
 //             });
-//             $("#btn-aa").on("click", function () {
+//             $("#btn-aa:selected").each(function () {
 //                 changeLang('aa')
 //             });
 //         })
