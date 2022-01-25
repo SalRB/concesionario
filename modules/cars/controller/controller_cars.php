@@ -5,7 +5,7 @@
 
 $path = $_SERVER['DOCUMENT_ROOT'] . '/cars/';
 include($path . "modules/cars/model/DAO_cars.php");
-session_start();
+// session_start();/////////////////////////////////////////////////////
 
 // include("modules/cars/model/DAO_cars.php");
 // session_start();

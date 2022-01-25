@@ -4,6 +4,8 @@ if ((isset($_GET['module'])) && ($_GET['module'] === "cars")) {
 } else {
 	include("views/inc/top_page.php");
 }
+// session_start(); ///////////////////////////////////////////
+
 
 ?>
 <div id="wrapper">
@@ -22,11 +24,6 @@ if ((isset($_GET['module'])) && ($_GET['module'] === "cars")) {
 		include_once("views/inc/pages.php");
 		?>
 		<br style="clear:both;" />
-	</div>
-	<div id="content">
-		<?php
-		include_once("views/inc/content.html");
-		?>
 	</div>
 	<div id="footer">
 		<?php
