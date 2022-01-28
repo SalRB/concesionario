@@ -2,7 +2,7 @@
 // echo 'asd';
 switch ($_GET['module']) {
 	case "home";
-		include("index.php");
+		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
 		break;
 	case "cars";
 		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
