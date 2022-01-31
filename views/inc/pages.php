@@ -17,6 +17,6 @@ switch ($_GET['module']) {
 		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
 		break;
 	default;
-		include("modules/controller/controller_home.php");
+		include("modules\home\controller\controller_home.php");
 		break;
 }

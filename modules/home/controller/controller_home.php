@@ -11,13 +11,13 @@ switch ($_GET['op']) {
 
     case 'HomeBrands';
 
-    $daocars = new DAOhome();
-    $rdo = $daocars->selectBrand();
-
-
-
+        $daocars = new DAOhome();
+        $rdo = $daocars->selectBrand();
+        echo json_encode($rdo);
 
         break;
+
+
     case 'HomeCategory';
         $selCatBrand = $homeQuery->selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
         if (!empty($selCatBrand)) {
