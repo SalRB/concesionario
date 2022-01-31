@@ -1,29 +1,41 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/cars/';
-include($path . "modules/cars/model/DAO_home.php");
+$path = $_SERVER['DOCUMENT_ROOT'] . '/concesionario/';
+include($path . "modules/home/model/DAO_home.php");
+
 // $homeQuery = new QuerysHomePage();
 
 switch ($_GET['op']) {
     case 'list';
-        include ('module/home/view/homepage.html');
+        include('modules/home/view/home.html');
         break;
-    case 'homePageSlide';
-        $selSlide = $homeQuery -> selectMultiple("SELECT carPlate, brand, model, image FROM allCars ORDER BY cv DESC LIMIT 5");
-        if (!empty($selSlide)) {
-            echo json_encode($selSlide);
-        }else {
-            echo "error";
-        }// end_else
+
+    case 'HomeBrands';
+
+    $daocars = new DAOhome();
+    $rdo = $daocars->selectBrand();
+
+
+
+
         break;
-    case 'homePageCat';
-        $selCatBrand = $homeQuery -> selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
+    case 'HomeCategory';
+        $selCatBrand = $homeQuery->selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
         if (!empty($selCatBrand)) {
             echo json_encode($selCatBrand);
-        }else{
+        } else {
             echo "error";
-        }// end_else
+        } // end_else
         break;
+    case 'HomeType';
+        $selCatBrand = $homeQuery->selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
+        if (!empty($selCatBrand)) {
+            echo json_encode($selCatBrand);
+        } else {
+            echo "error";
+        } // end_else
+        break;
+
     default;
-        include ('view/inc/error404.html');
+        include('view/inc/error404.html');
         break;
 }// end_switch

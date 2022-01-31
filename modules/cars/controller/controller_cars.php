@@ -3,7 +3,7 @@
 // $data = 'hola crtl user';
 // die('<script>console.log('.json_encode( $data ) .');</script>');
 
-$path = $_SERVER['DOCUMENT_ROOT'] . '/cars/';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/concesionario/';
 include($path . "modules/cars/model/DAO_cars.php");
 // session_start();/////////////////////////////////////////////////////
 
