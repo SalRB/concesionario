@@ -18,21 +18,20 @@ switch ($_GET['op']) {
         break;
 
 
-    case 'HomeCategory';
-        $selCatBrand = $homeQuery->selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
-        if (!empty($selCatBrand)) {
-            echo json_encode($selCatBrand);
-        } else {
-            echo "error";
-        } // end_else
+    case 'HomeCategories';
+
+        $daocars = new DAOhome();
+        $rdo = $daocars->selectCategories();
+        echo json_encode($rdo);
+
         break;
-    case 'HomeType';
-        $selCatBrand = $homeQuery->selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
-        if (!empty($selCatBrand)) {
-            echo json_encode($selCatBrand);
-        } else {
-            echo "error";
-        } // end_else
+
+    case 'HomeTypes';
+
+        $daocars = new DAOhome();
+        $rdo = $daocars->selectTypes();
+        echo json_encode($rdo);
+
         break;
 
     default;

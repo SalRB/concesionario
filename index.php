@@ -1,10 +1,10 @@
 <?php
 if ((isset($_GET['module'])) && ($_GET['module'] === "cars")) {
-	include("views/inc/top_page_cars.php");
+	include("views/inc/top_page_cars.html");
 } elseif ((isset($_GET['module'])) && ($_GET['module'] === "home")) {
 	include("views/inc/top_page_home.html");
 } else {
-	include("views/inc/top_page.php");
+	include("views/inc/top_page.html");
 }
 // session_start(); ///////////////////////////////////////////
 
