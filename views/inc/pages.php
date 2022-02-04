@@ -4,6 +4,9 @@ switch ($_GET['module']) {
 	case "home";
 		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
 		break;
+	case "shop";
+		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
+		break;
 	case "cars";
 		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
 		break;

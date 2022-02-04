@@ -6,7 +6,7 @@ function loadSlider() {
         dataType: 'JSON'
     }).done(function (data) {
 
-        $('<div></div>').attr('id', 'Div1').appendTo('.hero-slider-1');
+        $('<div></div>').attr('id', 'Div1').appendTo('#slider');
 
         $('#Div1').html(function () {
             var content = "";
@@ -66,13 +66,68 @@ function loadSlider() {
     });
 }
 
-function loadCategories(loadeds = 0) {
+function loadCategories() {
     $.ajax({
-        url: 'modules/home/controller/controller_home.php?op=HomeBrands',
+        url: 'modules/home/controller/controller_home.php?op=HomeCategories',
         type: 'GET',
         dataType: 'JSON'
     }).done(function (data) {
+        console.log(data);
+
+
+        $('<section></section>').attr({ 'id': "feature" }).appendTo('#categories');
+        $('<div></div>').attr({ 'id': "div1", 'class': 'container' }).appendTo('#feature');
+        $('<div></div>').attr({ 'id': "div2", 'class': 'center fadeInDown' }).appendTo('#div1');
+        $('<h2></h2>').html('HEY').appendTo('#div2');
+        $('<div></div>').attr({ 'id': "div3", 'class': 'row' }).appendTo('#div1');
+        $('<div></div>').attr({ 'id': "div4", 'class': 'features' }).appendTo('#div3');
+
+
+
         for (row in data) {
+
+            $('<div></div>').attr({ 'id': "div5" + row, 'class': 'col-md-3 col-sm-4 fadeInDown' }).appendTo('#div4');
+            $('<a></a>').attr({ 'id': "div6" + row, 'href': 'https://www.youtube.com/' }).appendTo('#div5' + row);
+            $('<div></div>').attr({ 'id': "div7" + row, 'class': 'feature-wrap' }).appendTo('#div6' + row);
+            $('<img></img>').attr({ 'id': "div8" + row, 'src': 'views/images/home/' + data[row].category_image + '', 'style': 'border-radius: 5px' }).appendTo('#div7' + row);
+            $('<h2></h2>').html(data[row].category_name).attr({ 'id': "div9", 'style': 'padding-top: 1em' }).appendTo('#div7' + row);
+
+
+
+        }
+
+
+    }).fail(function () {
+        window.location.href = "index.php?module=exceptions&op=503&message=Error_Categories_js";
+    });
+}
+
+function loadTypes() {
+    $.ajax({
+        url: 'modules/home/controller/controller_home.php?op=HomeTypes',
+        type: 'GET',
+        dataType: 'JSON'
+    }).done(function (data) {
+        console.log(data);
+
+
+        $('<section></section>').attr({ 'id': "feature" }).appendTo('#types');
+        $('<div></div>').attr({ 'id': "div11", 'class': 'container' }).appendTo('#feature');
+        $('<div></div>').attr({ 'id': "div12", 'class': 'center fadeInDown' }).appendTo('#div11');
+        $('<h2></h2>').html('HEY').appendTo('#div12');
+        $('<div></div>').attr({ 'id': "div13", 'class': 'row' }).appendTo('#div11');
+        $('<div></div>').attr({ 'id': "div14", 'class': 'features' }).appendTo('#div13');
+
+
+
+        for (row in data) {
+
+            $('<div></div>').attr({ 'id': "div15" + row, 'class': 'col-md-3 col-sm-4 fadeInDown' }).appendTo('#div14');
+            $('<a></a>').attr({ 'id': "div16" + row, 'href': 'https://www.youtube.com/' }).appendTo('#div15' + row);
+            $('<div></div>').attr({ 'id': "div17" + row, 'class': 'feature-wrap' }).appendTo('#div16' + row);
+            $('<img></img>').attr({ 'id': "div18" + row, 'src': 'views/images/home/' + data[row].type_image + '', 'style': 'border-radius: 5px' }).appendTo('#div17' + row);
+            $('<h2></h2>').html(data[row].type_name).attr({ 'id': "div19", 'style': 'padding-top: 1em' }).appendTo('#div17' + row);
+
 
 
         }
@@ -85,9 +140,14 @@ function loadCategories(loadeds = 0) {
 
 
 function loadDivs() {
+    $('<div></div>').attr({ 'id': "slider", 'class': 'row' }).appendTo('#homePage');
+    $('<h1></h1>').html('HEY').appendTo('#homePage').attr("style", "padding-bottom: 50px");
+    $('<div></div>').attr({ 'id': "categories", 'class': 'row' }).appendTo('#homePage');
+    $('<div></div>').attr({ 'id': "types", 'class': 'row' }).appendTo('#homePage');
+
     loadSlider();
     loadCategories();
-    // loadTypes();
+    loadTypes();
 }
 
 $(document).ready(function () {

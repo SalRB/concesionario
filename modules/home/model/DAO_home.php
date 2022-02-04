@@ -27,7 +27,7 @@ class DAOhome
 
     function selectCategories()
     {
-        $sql = "SELECT * FROM category LIMIT 5";
+        $sql = "SELECT * FROM category LIMIT 4";
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
@@ -44,7 +44,7 @@ class DAOhome
 
     function selectTypes()
     {
-        $sql = "SELECT * FROM type LIMIT 5";
+        $sql = "SELECT * FROM type LIMIT 3";
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);

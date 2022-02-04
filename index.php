@@ -3,6 +3,8 @@ if ((isset($_GET['module'])) && ($_GET['module'] === "cars")) {
 	include("views/inc/top_page_cars.html");
 } elseif ((isset($_GET['module'])) && ($_GET['module'] === "home")) {
 	include("views/inc/top_page_home.html");
+} elseif ((isset($_GET['module'])) && ($_GET['module'] === "shop")) {
+	include("views/inc/top_page_shop.html");
 } else {
 	include("views/inc/top_page.html");
 }
