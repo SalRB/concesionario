@@ -142,30 +142,30 @@ function loadContentModal() {
     $('.car').click(function () {
         var id = this.getAttribute('id');
         // console.log(id);
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            url: 'modules/cars/controller/controller_cars.php?op=readModal&id=' + id,
-            //////
-        }).done(function (data) {
-            // console.log(data);
-            $('<div></div>').attr('id', 'detailsCars', 'type', 'hidden').appendTo('#carModal');
-            $('<div></div>').attr('id', 'Div1').appendTo('#modalcontent');
 
-            $('#Div1').html(function () {
-                var content = "";
-                for (row in data) {
-                    content += '<br><span>' + row + ': <span id =' + row + '>' + data[row] + '</span></span>';
-                }// end_for
-                //////
-                return content;
+        ajaxPromise('modules/cars/controller/controller_cars.php?op=readModal&id=' + id,
+            'GET', 'JSON')
+
+
+            .then(function (data) {
+                // console.log(data);
+                $('<div></div>').attr('id', 'detailsCars', 'type', 'hidden').appendTo('#carModal');
+                $('<div></div>').attr('id', 'Div1').appendTo('#modalcontent');
+
+                $('#Div1').html(function () {
+                    var content = "";
+                    for (row in data) {
+                        content += '<br><span>' + row + ': <span id =' + row + '>' + data[row] + '</span></span>';
+                    }// end_for
+                    //////
+                    return content;
+                });
+
+                showModal(carTitle = data.brand + " " + data.model, data.carPlate);
+
+            }).catch(function () {
+                window.location.href = 'index.php?page=error503'; ///////////TA MAL
             });
-
-            showModal(carTitle = data.brand + " " + data.model, data.carPlate);
-
-        }).fail(function () {
-            window.location.href = 'index.php?page=error503'; ///////////TA MAL
-        });
     });
 
 
