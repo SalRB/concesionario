@@ -32,7 +32,7 @@ class DAOshop
         $sql = "SELECT * FROM carsv3 WHERE ID = '$ID'";
 
         $conexion = connect::con();
-        $res = mysqli_query($conexion, $sql);
+        $res = mysqli_query($conexion, $sql)->fetch_object();
         connect::close($conexion);
 
 
