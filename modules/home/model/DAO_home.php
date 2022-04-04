@@ -10,7 +10,7 @@ class DAOhome
 {
     function selectBrand()
     {
-        $sql = "SELECT * FROM brand LIMIT 5";
+        $sql = "SELECT * FROM brand LIMIT 6";
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);

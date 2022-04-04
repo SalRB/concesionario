@@ -1,0 +1,89 @@
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<form id="login_form" method="post">
+				<div class="sign-in-htm">
+					<div class="group">
+						<label for="l_username" class="label">Username</label>
+						<input id="l_username" type="text" class="input" name="username">
+						<div id="error_login_username" style="color: red;"></div>
+					</div>
+					<div class="group">
+						<label for="l_password" class="label">Password</label>
+						<input id="l_password" type="password" class="input" data-type="password" name="password">
+						<div id="error_login_password" style="color: red;"></div>
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check" checked>
+						<label for="check"><span class="icon"></span> Keep me Signed in</label>
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign In" id="login_button">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="#forgot">Forgot Password?</a>
+					</div>
+				</div>
+			</form>
+			<form id="register_form" method="post">
+				<div class="sign-up-htm">
+					<div class="group">
+						<label for="username" class="label">Username</label>
+						<input id="username" type="text" class="input" name="username">
+						<div id="error_username" style="color: red;"></div>
+					</div>
+					<div class="group">
+						<label for="password" class="label">Password</label>
+						<input id="password" type="password" class="input" data-type="password" name="password">
+						<div id="error_password" style="color: red;"></div>
+					</div>
+					<!-- <div class="group">
+					<label for="pass" class="label">Repeat Password</label>
+					<input id="pass" type="password" class="input" data-type="password">
+				</div> -->
+					<div class="group">
+						<label for="email" class="label">Email Address</label>
+						<input id="email" type="text" class="input" name="email">
+						<div id="error_email" style="color: red;"></div>
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign Up" id="register_button">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1">Already Member?</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- <form id="register_form" method="post">
+	<div class="form__content">
+		<div class="form__input">
+		  <label for="username"><b>Username</b></label>
+		  <input type="text" id="username" name="username" placeholder="Enter Username">
+			  <span id="error_username" class="error"></span>
+		</div>
+		<div class="form__input">
+		  <label for="email"><b>Email</b></label>
+		  <input type="text" id="email" name="email" placeholder="Enter Email">
+			  <span id="error_email" class="error"></span>
+		</div>
+		<div class="form__input">
+		  <label for="password"><b>Password</b></label>
+		  <input type="password" id="password" name="password" placeholder="Enter Password">
+			  <span id="error_password" class="error"></span>
+		</div>
+	</div>
+	<span class="psw">Forgot <a href="#">password?</a></span>
+	<div class="button_container">
+	  <input class="button" id="register_button" type="button" value = "Enter"/>
+	</div>
+  </form> -->

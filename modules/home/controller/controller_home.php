@@ -3,6 +3,9 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/concesionario/';
 include($path . "modules/home/model/DAO_home.php");
 
 // $homeQuery = new QuerysHomePage();
+if (isset($_SESSION["tiempo"])) {
+    $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+}
 
 switch ($_GET['op']) {
     case 'list';

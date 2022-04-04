@@ -19,6 +19,9 @@ switch ($_GET['module']) {
 	case "exceptions";
 		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
 		break;
+	case "login";
+		include("modules/" . $_GET['module'] . "/controller/controller_" . $_GET['module'] . ".php");
+		break;
 	default;
 		include("modules\home\controller\controller_home.php");
 		break;

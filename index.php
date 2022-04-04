@@ -5,6 +5,8 @@ if ((isset($_GET['module'])) && ($_GET['module'] === "cars")) {
 	include("views/inc/top_page_home.html");
 } elseif ((isset($_GET['module'])) && ($_GET['module'] === "shop")) {
 	include("views/inc/top_page_shop.html");
+} elseif ((isset($_GET['module'])) && ($_GET['module'] === "login")) {
+	include("views/inc/top_page_login.html");
 } else {
 	include("views/inc/top_page.html");
 }
