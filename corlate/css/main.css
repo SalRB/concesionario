@@ -5,6 +5,13 @@
 ***********Mio************
 **************************/
 
+.topright {
+    position: absolute;
+    top: 15px;
+    right: 700px;
+    font-size: 26px;
+}
+
 #cosa0 {
     margin-top: 77px;
     padding: 10px;
@@ -78,11 +85,14 @@ body {
     font: 600 16px/18px 'Open Sans', sans-serif;
 }
 
-*, :after, :before {
+*,
+:after,
+:before {
     box-sizing: border-box
 }
 
-.clearfix:after, .clearfix:before {
+.clearfix:after,
+.clearfix:before {
     content: '';
     display: table
 }

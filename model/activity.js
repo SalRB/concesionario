@@ -34,7 +34,6 @@ function refresh_token() {
     ajaxPromise('modules/login/controller/controller_login.php?op=refresh_token', 'POST', 'JSON',
         { token: localStorage.getItem('token') })
         .then(function (data) {
-            console.log(data);
             localStorage.setItem("token", data);
         }).catch(function (e) {
             console.log(e);
@@ -44,7 +43,7 @@ function refresh_token() {
 function refresh_cookie() {
     ajaxPromise('modules/login/controller/controller_login.php?op=refresh_cookie', 'POST')
         .then(function (data) {
-            console.log('done');
+            // console.log('done');
         }).catch(function (e) {
             console.log(e);
         });

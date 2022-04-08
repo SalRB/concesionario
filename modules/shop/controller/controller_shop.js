@@ -1,7 +1,7 @@
 function OnClick() {
 
-  $(document).on('click', '#cosa1', function () {
-    var id = this.getAttribute('class');
+  $(document).on('click', '#cosa3', function () {
+    var id = this.getAttribute('car_id');
 
     CountVisits(id);
     loadDetails(id);
@@ -127,13 +127,21 @@ function ajaxForSearch(durl, method = 'GET', params) {
       addAPI();
       CreateMap();
       for (row in data) {
-        $('<div></div>').attr({ 'class': data[row].ID, 'id': "cosa1", 'style': '' }).appendTo('.cosa0');
-        $('<div></div>').attr({ 'class': "cosa3" + row, 'id': "cosa3" }).appendTo('.' + data[row].ID);
+        $('<div></div>').attr({ 'class': data[row].ID, 'id': "cosa1", 'car_id': data[row].ID }).appendTo('.cosa0');
+        $('<div></div>').attr({ 'class': "cosa3" + row, 'id': "cosa3", 'car_id': data[row].ID }).appendTo('.' + data[row].ID);
         $('<div></div>').attr({ 'class': "clearfix" + row, 'id': "clearfix" }).appendTo('.' + data[row].ID);
         $('<h1></h1>').html(data[row].brand + ' ' + data[row].model).attr({ 'class': "cosa4" + row, 'id': "cosa4" }).appendTo('.cosa3' + row);
         $('<h1></h1>').html(data[row].price + '€  ' + data[row].category).attr({ 'class': "cosa5" + row, 'id': "cosa5" }).appendTo('.cosa3' + row);
         $('<h1></h1>').html(data[row].km + ' KM').attr({ 'class': "cosa5" + row, 'id': "cosa5" }).appendTo('.cosa3' + row);
-        $('<img></img>').attr({ 'class': "imagen" + row, 'id': "imagen", 'src': 'views/images/cars/' + data[row].image + '' }).appendTo('.clearfix' + row);
+        $('<div></div>').attr({ 'class': "divImagen" + data[row].ID, 'id': "divImagen" + data[row].ID, 'style': 'position: relative;' }).appendTo('.clearfix' + row);
+        $('<img></img>').attr({ 'class': "imagen" + row, 'id': "imagen", 'src': 'views/images/cars/' + data[row].image + '' }).appendTo('#divImagen' + data[row].ID);
+
+        // $('<i></i>').attr({ 'class': "topright fa fa-heart", 'id': "heart" }).appendTo('#divImagen' + row).html('<h3></h3>');
+        $('<i></i>').attr({ 'class': "topright fa fa-heart-o elbotondelike", 'id': "heart" + data[row].ID, 'car_id': data[row].ID }).appendTo('#divImagen' + data[row].ID).html('<h3></h3>');
+
+
+        // $('<div></div>').attr({ 'class': "heart", 'id': data[row].ID, 'style': "position: static;" }).appendTo('.cosa3' + row).html('<h3>REXTVUYGIHOIJPOK^PL</h3>');
+        // $('<i></i>').attr({ 'class': "bx bx-heart", 'id': 'like' }).appendTo('#cosa4').html('<h1>REXTVUYGIHOIJPOK^PL</h1>');
 
         AddMarker(data, row);
       }
@@ -142,6 +150,9 @@ function ajaxForSearch(durl, method = 'GET', params) {
         $('<h1></h1>').html('Sin resultados para estos criterios').attr({ 'id': "A", 'style': 'margin-left: 55px;' }).appendTo('#divCars');
         // $('<div></div>').attr({ 'id': "A", 'style': 'margin-left: 55px;' }).appendTo('#divCars').html('<h1>Sin resultados para estos criterios<h1/>');
       }
+
+      load_like();
+
     }).catch(function () {
       $("#divCars").empty();
       $('<h1></h1>').html('Sin resultados para estos criterios').attr({ 'id': "A", 'style': 'margin-left: 400px; position: absolute; top: 233px;' }).appendTo('#divCars');
@@ -494,6 +505,71 @@ function LoadRelated(id) {
     });
 }
 
+function load_like() {
+  if (localStorage.getItem('token')) {
+    ajaxPromise('modules/shop/controller/controller_shop.php?op=load_likes', 'POST', 'JSON',
+      { token: localStorage.getItem('token') })
+      .then(function (data) {
+        console.log(data);
+        for (row in data) {
+          if ($("#divImagen" + data[row].car).children("i").hasClass("fa-heart-o")) {
+            $("#divImagen" + data[row].car).children("i").removeClass("fa-heart-o").addClass("fa-heart");
+          }
+        }
+      }).catch(function (e) {
+        console.log(e);
+      });
+
+  }
+}
+
+function click_like() {
+  $(document).on('click', '.elbotondelike', function () {
+    if (!localStorage.getItem('token')) {
+      window.location.href = "index.php?module=login&op=list";
+
+      // if ($(this).children("i").hasClass("bx-heart")) {
+      //   $(this).children("i").removeClass("bx-heart").addClass("bxs-heart");
+      //   like_storage(this.getAttribute('id'), like);
+      // } else {
+      //   $(this).children("i").removeClass("bxs-heart").addClass("bx-heart");
+      //   like_storage(this.getAttribute('id'), like);
+      // }
+    } else {
+      ajaxPromise("modules/shop/controller/controller_shop.php?op=control_likes", 'POST', 'JSON', { token: localStorage.getItem('token'), id: this.getAttribute('car_id') })
+        .then(function (data) {
+          console.log(data);
+        }).catch(function (e) {
+          console.log(e);
+          // window.location.href = 'index.php?page=error503'
+        });
+
+      if ($(this).hasClass("fa-heart")) {
+        $(this).removeClass("fa-heart").addClass("fa-heart-o");
+      } else {
+        $(this).removeClass("fa-heart-o").addClass("fa-heart");
+      }
+    }
+  });
+}
+
+function like_storage(id) {
+  var local = localStorage.getItem('likes');
+
+  if (local != null) {
+    var like = JSON.parse(local);
+  } else {
+    var like = [];
+  }
+
+  if (like.indexOf(id) === -1) {
+    like.push(id);
+  } else if (like.indexOf(id) !== -1) {
+    like.splice(like.indexOf(id), 1);
+  }
+
+  localStorage.setItem('likes', JSON.stringify(like));
+}
 
 $(document).ready(function () {
   const map = null;
@@ -508,4 +584,5 @@ $(document).ready(function () {
   printFilters();
   loadListCars();
   OnClick();
+  click_like();
 });

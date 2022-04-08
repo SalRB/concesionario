@@ -1,6 +1,7 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/concesionario/';
 include($path . "modules/shop/model/DAO_shop.php");
+include($path . "views/inc/JWT.php");
 // die('<script>console.log('.json_encode( 'AAAAAAAAAAAAAAAAAAA' ) .');</script>');
 
 // $homeQuery = new QuerysHomePage();
@@ -126,6 +127,63 @@ switch ($_GET['op']) {
         }
 
         break;
+
+    case 'load_likes';
+        try {
+
+            $jwt = parse_ini_file("jwt.ini");
+            $secret = $jwt['secret'];
+            $token = $_POST['token'];
+
+            $JWT = new JWT;
+            $json = $JWT->decode($token, $secret);
+            $json = json_decode($json, TRUE);
+
+            $dao = new DAOShop();
+            $rdo = $dao->select_load_likes($json['name']);
+
+            echo json_encode($rdo);
+        } catch (Exception $e) {
+            echo json_encode("error");
+            exit;
+        }
+        break;
+
+    case 'control_likes';
+
+        try {
+            $jwt = parse_ini_file("jwt.ini");
+            $secret = $jwt['secret'];
+            $token = $_POST['token'];
+
+            $JWT = new JWT;
+            $json = $JWT->decode($token, $secret);
+            $json = json_decode($json, TRUE);
+
+            $dao = new DAOShop();
+            $rdo = $dao->select_likes($_POST['id'], $json['name']);
+        } catch (Exception $e) {
+            echo json_encode("a");
+            exit;
+        }
+
+        // $dinfo = array();
+        // foreach ($rdo as $row) {
+        //     array_push($dinfo, $row);
+        // }
+        if (count($rdo) === 0) {
+            $dao = new DAOShop();
+            $rdo2 = $dao->insert_likes($_POST['id'], $json['name']);
+            echo json_encode("0");
+        } else {
+            $dao = new DAOShop();
+            $rdo2 = $dao->delete_likes($_POST['id'], $json['name']);
+            echo json_encode("1");
+        }
+
+        break;
+
+
 
 
     default;

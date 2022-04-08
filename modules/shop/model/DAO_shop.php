@@ -372,7 +372,14 @@ class DAOshop
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
-        return $res;
+
+        $retrArray = array();
+        if (mysqli_num_rows($res) > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            } // end_while
+        } // end_if
+        return $retrArray;
     }
 
     function select_likes($car, $user)
@@ -381,7 +388,14 @@ class DAOshop
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
-        return $res;
+
+        $retrArray = array();
+        if (mysqli_num_rows($res) > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            } // end_while
+        } // end_if
+        return $retrArray;
     }
 
     function insert_likes($car, $user)
@@ -395,7 +409,7 @@ class DAOshop
 
     function delete_likes($car, $user)
     {
-        $sql = "DELETE FROM likes WHERE user='$user' AND codigo_producto='$car'";
+        $sql = "DELETE FROM likes WHERE user='$user' AND car='$car'";
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
